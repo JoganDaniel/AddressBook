@@ -23,6 +23,7 @@ namespace AddressBook
                 PhoneNumber = Convert.ToInt32(Console.ReadLine()),
                 Email = Console.ReadLine(),
             };
+            Console.WriteLine("Added Contact :");
             Console.WriteLine(contact.FirstName + "\n" + contact.LastName + "\n" + contact.Address + "\n" + contact.City + "\n" + contact.State + "\n" + contact.Zip + "\n" + contact.PhoneNumber + "\n" + contact.Email);
             addressbooklist.Add(contact);
         }
@@ -32,7 +33,7 @@ namespace AddressBook
             {
                 if(contact.FirstName == name || contact.LastName.Equals(name))
                 {
-                    Console.WriteLine("Enter what to edit 1.Last Name\n2.Address \n3.City Name \n4.State Name \n5.Zip code \n6.Phone Number \n7.Email Address ");
+                    Console.WriteLine("Enter what to edit\n1.Last Name\n2.Address \n3.City Name \n4.State Name \n5.Zip code \n6.Phone Number \n7.Email Address ");
                     int option = Convert.ToInt32(Console.ReadLine());
                     switch(option)
                     {
@@ -66,6 +67,19 @@ namespace AddressBook
             }
         }
 
+        public void DeleteContact(string name)
+        {
+            Contact contact = new Contact();
+            foreach (Contact data in addressbooklist)
+            {
+                if (data.FirstName == name || data.LastName.Equals(name))
+                {
+                    contact = data;
+                }
+            }
+            addressbooklist.Remove(contact);
+            Console.WriteLine("Contact Removed");
+        }
         public void DisplayContacts()
         {
             int c = 1;
