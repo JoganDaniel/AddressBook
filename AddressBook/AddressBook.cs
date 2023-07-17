@@ -6,8 +6,9 @@ using System.Threading.Tasks;
 
 namespace AddressBook
 {
-    public class AddressBook
+    public class Addressbook
     {
+        List<Contact> addressbooklist = new List<Contact>();
         public void CreateContact()
         {
             Console.WriteLine("Enter the details 1.First Name\n2.Last Name\n3.Address \n4.City Name \n5.State Name \n.6.Zip code \n7.Phone Number \n8.Email Address ");
@@ -23,6 +24,7 @@ namespace AddressBook
                 Email = Console.ReadLine(),
             };
             Console.WriteLine(contact.FirstName + "\n " + contact.LastName + "\n " + contact.Address + "\n " + contact.City + "\n " + contact.State + "\n " + contact.Zip + "\n " + contact.PhoneNumber + "\n " + contact.Email);
+            addressbooklist.Add(contact);
         }
     }
 }
