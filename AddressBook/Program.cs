@@ -11,26 +11,34 @@ namespace AddressBook
             bool flag = true;
             while (flag)
             {
-                Console.WriteLine("1.Create Contact\n2.Edit Contact\n3.Display Contacts\n4.Delete Contact\n5.Exit");
+                Console.WriteLine("1.Create Contact\n2.Add to Dictionary\n3.Edit Contact\n4.Display Contacts\n5.Delete Contact\n6.Exit");
                 int choice = Convert.ToInt32(Console.ReadLine());
+                string key;
                 switch (choice)
                 {
                     case 1:
                         addressbook.CreateContact();
                         break;
                     case 2:
-                        Console.WriteLine("Enter the first name");
-                        string fname = Console.ReadLine();
-                        addressbook.EditContact(fname);
+                        addressbook.AddAddressBookToDictionary();
                         break;
                     case 3:
-                        addressbook.DisplayContacts();
+                        Console.WriteLine("Enter key");
+                         key = Console.ReadLine();
+                        Console.WriteLine("Enter the first name");
+                        string fname = Console.ReadLine();
+                        addressbook.EditContact(key,fname);
                         break;
                     case 4:
-                        string name = Console.ReadLine();
-                        addressbook.DeleteContact(name);
+                        addressbook.DisplayContacts();
                         break;
                     case 5:
+                        Console.WriteLine("Enter key");
+                         key = Console.ReadLine();
+                        string name = Console.ReadLine();
+                        addressbook.DeleteContact(key,name);
+                        break;
+                    case 6:
                         flag = false;
                         break;
                     default:
