@@ -33,7 +33,7 @@ namespace AddressBook
             Console.WriteLine("Enter a unique key");
             string uniquename = Console.ReadLine();
             dict.Add(uniquename, addressbooklist);
-            addressbooklist = null;
+            addressbooklist = new List<Contact>();
         }
         public void EditContact(string name,string contactname) 
         { 
@@ -78,10 +78,6 @@ namespace AddressBook
                         }
                     }
                 }
-                else
-                {
-                    Console.WriteLine("No key exists");
-                }
             }
         }
 
@@ -91,14 +87,14 @@ namespace AddressBook
             foreach (var item in dict)
             {
                 if (item.Key.Equals(name)) {
-                    foreach (Contact data in item.Value)
+                    foreach (var data in item.Value)
                     {
                         if (data.FirstName.Equals(contactname) || data.LastName.Equals(contactname))
                         {
                             contact = data;
                         }
                     }
-                    addressbooklist.Remove(contact);
+                    item.Value.Remove(contact);
                     Console.WriteLine("Contact Removed");
                 }
                 else

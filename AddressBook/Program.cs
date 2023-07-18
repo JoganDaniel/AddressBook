@@ -34,7 +34,8 @@ namespace AddressBook
                         break;
                     case 5:
                         Console.WriteLine("Enter key");
-                         key = Console.ReadLine();
+                        key = Console.ReadLine();
+                        Console.WriteLine("Enter name");
                         string name = Console.ReadLine();
                         addressbook.DeleteContact(key,name);
                         break;
