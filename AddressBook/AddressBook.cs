@@ -14,6 +14,7 @@ namespace AddressBook
         Dictionary<string,List<Contact>> dict = new Dictionary<string,List<Contact>>();
         Dictionary<string, List<Contact>> stateDict = new Dictionary<string, List<Contact>>();
         Dictionary<string, List<Contact>> cityDict = new Dictionary<string, List<Contact>>();
+        int stateCount, cityCount;
         public void CreateContact()
         {
             Console.WriteLine("Enter the details\n1.First Name\n2.Last Name\n3.Address \n4.City Name \n5.State Name \n6.Zip code \n7.Phone Number \n8.Email Address ");
@@ -159,6 +160,7 @@ namespace AddressBook
             }
                 stateDict.Add(input, result);
                 DisplayDict(stateDict);
+            stateCount=result.Count;
        
         }
         public void GetDetailsFromCity(string input)
@@ -168,10 +170,23 @@ namespace AddressBook
             {
                 result = data.Value.Where(x => x.City.Equals(input)).ToList();
             }
-            
+                
                 cityDict.Add(input, result);
                 DisplayDict(cityDict);
+            cityCount = result.Count;
             
+        }
+        public void GetContactCountFromState(string input)
+        {
+            GetDetailsFromState(input);
+            Console.WriteLine("Count : "+stateCount);
+
+        }
+        public void GetContactCountFromCity(string input)
+        {
+            GetDetailsFromCity(input);
+            Console.WriteLine("Count : " + cityCount);
+
         }
         public void DisplayDict(Dictionary<string,List<Contact>> dict)
         {
