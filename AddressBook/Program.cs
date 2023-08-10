@@ -1,8 +1,11 @@
 ﻿using System;
+using System.Collections.Generic;
+
 namespace AddressBook
 {
     public class Program
     {
+        static string file_path = @"E:\Bridgelabz\AddressBook\AddressBook\AddressBook\AddressBookData.json";
         private static void Main(string[] args)
         {
             Console.WriteLine("Welcome to Address Book program");
@@ -11,7 +14,7 @@ namespace AddressBook
             bool flag = true;
             while (flag)
             {
-                Console.WriteLine("1.Create Contact\n2.Add to Dictionary\n3.Edit Contact\n4.Display Contacts\n5.Delete Contact\n6.Exit");
+                Console.WriteLine("1.Create Contact\n2.Add to Dictionary\n3.Edit Contact\n4.Display Contacts\n5.Delete Contact\n6.Serialize dict to JSON\n7.Exit");
                 int choice = Convert.ToInt32(Console.ReadLine());
                 string key;
                 switch (choice)
@@ -40,6 +43,9 @@ namespace AddressBook
                         addressbook.DeleteContact(key,name);
                         break;
                     case 6:
+                        addressbook.WriteToJsonFile(file_path);
+                        break;
+                    case 7:
                         flag = false;
                         break;
                     default:

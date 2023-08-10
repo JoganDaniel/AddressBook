@@ -1,9 +1,11 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-
+using Newtonsoft.Json;
 namespace AddressBook
 {
     public class Addressbook
@@ -23,10 +25,17 @@ namespace AddressBook
                 Zip = Convert.ToInt32(Console.ReadLine()),
                 PhoneNumber = Convert.ToInt32(Console.ReadLine()),
                 Email = Console.ReadLine(),
-            };
-            Console.WriteLine("Added Contact :");
-            Console.WriteLine(contact.FirstName + "\n" + contact.LastName + "\n" + contact.Address + "\n" + contact.City + "\n" + contact.State + "\n" + contact.Zip + "\n" + contact.PhoneNumber + "\n" + contact.Email);
-            addressbooklist.Add(contact);
+            };    
+            if (CheckName(contact))
+            {
+                Console.WriteLine("Name is already present");
+            }
+            else
+            {
+                Console.WriteLine("Added Contact :");
+                Console.WriteLine(contact.FirstName + "\n" + contact.LastName + "\n" + contact.Address + "\n" + contact.City + "\n" + contact.State + "\n" + contact.Zip + "\n" + contact.PhoneNumber + "\n" + contact.Email);
+                addressbooklist.Add(contact);
+            }
         }
         public void AddAddressBookToDictionary()
         {
@@ -103,6 +112,7 @@ namespace AddressBook
                 }
             }
         }
+
         public void DisplayContacts()
         {
             foreach (var data in dict)
@@ -116,6 +126,26 @@ namespace AddressBook
                     c++;
                 }
             }
+        }
+        public void WriteToJsonFile(string filepath)
+        {
+            var json = JsonConvert.SerializeObject(dict);
+            File.WriteAllText(filepath, json);
+        }
+
+        public bool CheckName(Contact contact)
+        {
+            string name = contact.FirstName;
+            List<Contact> list2 = null;
+            foreach(var data in dict)
+            {
+               list2 = data.Value.Where(x => x.FirstName.Equals(name)).ToList();
+            }
+            if (list2 == null)
+            {
+                return false;
+            }
+            return true;
         }
     }
 }
