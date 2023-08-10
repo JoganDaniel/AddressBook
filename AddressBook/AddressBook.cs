@@ -12,6 +12,8 @@ namespace AddressBook
     {
         List<Contact> addressbooklist = new List<Contact>();
         Dictionary<string,List<Contact>> dict = new Dictionary<string,List<Contact>>();
+        Dictionary<string, List<Contact>> stateDict = new Dictionary<string, List<Contact>>();
+        Dictionary<string, List<Contact>> cityDict = new Dictionary<string, List<Contact>>();
         public void CreateContact()
         {
             Console.WriteLine("Enter the details\n1.First Name\n2.Last Name\n3.Address \n4.City Name \n5.State Name \n6.Zip code \n7.Phone Number \n8.Email Address ");
@@ -148,17 +150,48 @@ namespace AddressBook
             return true;
         }
 
-        public void GetDetailsFromCityorState(string input)
+        public void GetDetailsFromState(string input)
         {
             List<Contact> result = null;
             foreach (var data in dict)
             {
-                result = data.Value.Where(x => x.City.Equals(input) || x.State.Equals(input)).ToList();
+                result = data.Value.Where(x => x.State.Equals(input)).ToList();
             }
-            foreach(var contact in result)
+                stateDict.Add(input, result);
+                DisplayDict(stateDict);
+       
+        }
+        public void GetDetailsFromCity(string input)
+        {
+            List<Contact> result = null;
+            foreach (var data in dict)
+            {
+                result = data.Value.Where(x => x.City.Equals(input)).ToList();
+            }
+            
+                cityDict.Add(input, result);
+                DisplayDict(cityDict);
+            
+        }
+        public void DisplayDict(Dictionary<string,List<Contact>> dict)
+        {
+            foreach (var data in dict)
+            {
+                Console.WriteLine("Key : "+data.Key);
+                foreach (var contact in data.Value)
+                {
+                    Console.WriteLine(contact.FirstName + "\n" + contact.LastName + "\n" + contact.Address + "\n" + contact.City + "\n" + contact.State + "\n" + contact.Zip + "\n" + contact.PhoneNumber + "\n" + contact.Email);
+                }
+            }
+        }
+
+        public void DisplayList(List<Contact> list)
+        {
+            foreach (var contact in list)
             {
                 Console.WriteLine(contact.FirstName + "\n" + contact.LastName + "\n" + contact.Address + "\n" + contact.City + "\n" + contact.State + "\n" + contact.Zip + "\n" + contact.PhoneNumber + "\n" + contact.Email);
             }
         }
+
     }
 }

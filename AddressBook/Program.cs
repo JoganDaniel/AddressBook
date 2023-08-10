@@ -14,7 +14,7 @@ namespace AddressBook
             bool flag = true;
             while (flag)
             {
-                Console.WriteLine("1.Create Contact\n2.Add to Dictionary\n3.Edit Contact\n4.Display Contacts\n5.Delete Contact\n6.Serialize dict to JSON\n7.Search From city or state\n8.Exit");
+                Console.WriteLine("1.Create Contact\n2.Add to Dictionary\n3.Edit Contact\n4.Display Contacts\n5.Delete Contact\n6.Serialize dict to JSON\n7.Search From state using dictionary\n8.Search From cityusing dictionary\n9.Exit");
                 int choice = Convert.ToInt32(Console.ReadLine());
                 string key;
                 switch (choice)
@@ -46,11 +46,16 @@ namespace AddressBook
                         addressbook.WriteToJsonFile(file_path);
                         break;
                     case 7:
-                        Console.WriteLine("Enter city or state name");
+                        Console.WriteLine("Enter state name");
                         string input = Console.ReadLine();
-                        addressbook.GetDetailsFromCityorState(input);
+                        addressbook.GetDetailsFromState(input);
                         break;
                     case 8:
+                        Console.WriteLine("Enter city");
+                        string city = Console.ReadLine();
+                        addressbook.GetDetailsFromCity(city);
+                        break;
+                    case 9:
                         flag = false;
                         break;
                     default:
