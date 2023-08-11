@@ -158,9 +158,13 @@ namespace AddressBook
             {
                 result = data.Value.Where(x => x.State.Equals(input)).ToList();
             }
+            if (stateDict.ContainsKey(input))
+            {
                 stateDict.Add(input, result);
+                stateCount = result.Count;
+            }
                 DisplayDict(stateDict);
-            stateCount=result.Count;
+            
        
         }
         public void GetDetailsFromCity(string input)
@@ -170,11 +174,13 @@ namespace AddressBook
             {
                 result = data.Value.Where(x => x.City.Equals(input)).ToList();
             }
-                
+            if (!cityDict.ContainsKey(input))
+            {
+
                 cityDict.Add(input, result);
-                DisplayDict(cityDict);
-            cityCount = result.Count;
-            
+                cityCount = result.Count;  
+            }
+            DisplayDict(cityDict);
         }
         public void GetContactCountFromState(string input)
         {
