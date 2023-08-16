@@ -72,7 +72,6 @@ namespace AddressBook
                         Console.WriteLine("Enter correct choice");
                         break;
                 }
-            
             }
         }
     }
