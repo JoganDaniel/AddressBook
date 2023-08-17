@@ -2,9 +2,12 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using CsvHelper;
+using CsvHelper.Configuration;
 using Newtonsoft.Json;
 namespace AddressBook
 {
@@ -389,6 +392,39 @@ namespace AddressBook
                 }
             }
         }
+
+        public void ExportToCsv(string filepath)
+        {
+            using (var writer = new StreamWriter(filepath))
+            {
+                using (var csv = new CsvWriter(writer, CultureInfo.InvariantCulture))
+                {
+                    foreach (var data in dict)
+                    {
+                        csv.WriteField(data.Key);
+                        csv.WriteField(""); 
+
+                        foreach (var contact in data.Value)
+                        {
+                            csv.WriteField(contact.FirstName);
+                            csv.WriteField(contact.LastName);
+                            csv.WriteField(contact.Address);
+                            csv.WriteField(contact.City);
+                            csv.WriteField(contact.State);
+                            csv.WriteField(contact.Zip);
+                            csv.WriteField(contact.PhoneNumber);
+                            csv.WriteField(contact.Email);
+
+                            csv.WriteField("|");
+                        }
+
+                        csv.NextRecord();
+                    }
+                }
+            }
+        }
+
+
 
         public void WriteToJsonFile(string filepath)
         {

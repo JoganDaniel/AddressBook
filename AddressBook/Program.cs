@@ -1,12 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
-
 namespace AddressBook
 {
     public class Program
     {
         static string json_file_path = @"E:\Bridgelabz\AddressBook\AddressBook\AddressBook\AddressBookData.json";
         static string txt_file_path = @"E:\Bridgelabz\AddressBook\AddressBook\AddressBook\AddressBookFile.txt";
+        static string csv_file_path = @"E:\Bridgelabz\AddressBook\AddressBook\AddressBook\AddressBookCSV.csv";
         private static void Main(string[] args)
         {
             Console.WriteLine("Welcome to Address Book program");
@@ -15,7 +15,7 @@ namespace AddressBook
             bool flag = true;
             while (flag)
             {
-                Console.WriteLine("1.Create Contact\n2.Add to Dictionary\n3.Edit Contact\n4.Display Contacts\n5.Delete Contact\n6.Serialize dict to JSON\n7.Search From state using dictionary\n8.Search From city using dictionary\n9.Number of contact in state\n10.Number of contact in city\n11.AddToCityAndStateDictionary\n12.Sort the entries\n13.Read and write to file\n15.Read from json file\n16.Exit ");
+                Console.WriteLine("1.Create Contact\n2.Add to Dictionary\n3.Edit Contact\n4.Display Contacts\n5.Delete Contact\n6.Serialize dict to JSON\n7.Search From state using dictionary\n8.Search From city using dictionary\n9.Number of contact in state\n10.Number of contact in city\n11.AddToCityAndStateDictionary\n12.Sort the entries\n13.Read and write to file\n14.Read and write from csv file\n15.Read from json file\n16.Exit ");
                 int choice = Convert.ToInt32(Console.ReadLine());
                 string key;
                 switch (choice)
@@ -71,12 +71,11 @@ namespace AddressBook
                         addressbook.SearchByState();
                         break;
                     case 12:
-                            Console.WriteLine("With what do you want to sort");
-                            Console.WriteLine("1.Name 2.State 3.City 4.Zip");
-                            int ch = Convert.ToInt32(Console.ReadLine());
-                            addressbook.SortEntries(ch);
-                            break;
-                        
+                        Console.WriteLine("With what do you want to sort");
+                        Console.WriteLine("1.Name 2.State 3.City 4.Zip");
+                        int ch = Convert.ToInt32(Console.ReadLine());
+                        addressbook.SortEntries(ch);
+                        break;
                     case 13:
                         Console.WriteLine("1.Read from file 2.Write to file");
                         int ch1 = Convert.ToInt32(Console.ReadLine());
@@ -87,6 +86,18 @@ namespace AddressBook
                         if (ch1 == 2)
                         {
                             addressbook.WriteToFile(txt_file_path);
+                        }
+                        break;
+                    case 14:
+                        Console.WriteLine("1.Read from csv file 2.Write to csv file");
+                        int ch2 = Convert.ToInt32(Console.ReadLine());
+                        if (ch2 == 1)
+                        {
+                            addressbook.ImportFromCsv(csv_file_path);
+                        }
+                        if (ch2 == 2)
+                        {
+                            addressbook.ExportToCsv(csv_file_path);
                         }
                         break;
                     case 15:
