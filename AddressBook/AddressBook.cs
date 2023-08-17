@@ -424,8 +424,6 @@ namespace AddressBook
             }
         }
 
-
-
         public void WriteToJsonFile(string filepath)
         {
             var json = JsonConvert.SerializeObject(dict);
